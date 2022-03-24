@@ -1,0 +1,19 @@
+.text1
+{
+    font-weight: bold !important;
+}
+
+.image
+{
+    background-image: url(https://wallpapercave.com/wp/wp5546416.jpg);
+    background-repeat: no-repeat;
+    width: 100vh;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.text-decorator-none
+{
+    text-decoration: none;
+}
