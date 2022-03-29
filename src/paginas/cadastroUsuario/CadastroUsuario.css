@@ -1,0 +1,25 @@
+.image2
+{
+    background-image: url(https://wallpapercave.com/wp/wp5546416.jpg);
+    background-repeat: no-repeat;
+    width: 100vh;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.text-decorator-none
+{
+    text-decoration: none;
+}
+
+
+.text2
+{
+    font-weight: bold !important;
+}
+
+.btnCancelar
+{
+    margin-right: 20px !important;
+}
