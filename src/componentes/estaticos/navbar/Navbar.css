@@ -8,3 +8,19 @@ color:#ffffff;
 {
     text-decoration: none;
 }
+
+.imgLogo
+{
+    background-image: url(../../../assets/img/JojoLogo.png);
+    width: 20vh;
+    height: 10vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.navCor
+{
+    background-color: #C71585;
+}
