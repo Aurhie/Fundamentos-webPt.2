@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import ModalPostagem from "../../componentes/postagens/modalPost/ModalPost";
 import { useSelector } from "react-redux";
 import { TokenState } from "../../store/tokens/TokensReducer";
+import { toast } from "react-toastify";
 
 function Home() {
     let history = useHistory();
@@ -16,7 +17,16 @@ function Home() {
 
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado")
+            toast.error('Você precisa estar logado', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: 'colored',
+                progress: undefined,
+        })
             history.push("/login")
 
         }
