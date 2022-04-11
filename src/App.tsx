@@ -11,7 +11,7 @@ import CadastroPost from './componentes/postagens/cadastroPost/CadastroPost';
 import CadastroTema from './componentes/temas/cadastroTema/CadastroTema';
 import DeletarPost from './componentes/postagens/deletarPost/DeletarPost';
 import DeletarTema from './componentes/temas/deletarTema/DeletarTema';
-import ListaTema from './componentes/temas/listaTema/ListaTema';
+import ListaTema from '../src/componentes/temas/listaTema/ListaTema';
 import { Provider } from 'react-redux';
 import store from './store/Store';
 import {ToastContainer} from 'react-toastify';
