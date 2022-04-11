@@ -3,16 +3,19 @@ import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem,
 import './CadastroPost.css';
 import { useHistory, useParams } from 'react-router-dom';
 import Tema from '../../../models/Tema';
-import useLocalStorage from 'react-use-localstorage';
 import Postagem from '../../../models/Postagem';
 import { busca, buscaId, post, put } from '../../../services/Services';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/TokensReducer';
 
 function CadastroPost() {
     let history = useHistory();
     const { id } = useParams<{ id: string }>();
     const [temas, setTemas] = useState<Tema[]>([])
-    const [token, setToken] = useLocalStorage('token');
+    const token=useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )
 
     useEffect(() => {
         if (token == "") {
@@ -87,40 +90,64 @@ function CadastroPost() {
         e.preventDefault()
 
         if (id !== undefined) {
-            put(`/postagens`, postagem, setPostagem, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-            toast.success('Postagem atualizada com sucesso.', {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                theme: 'colored',
-                progress: undefined,
-        })
+            try {
+                await put(`/postagens`, postagem, setPostagem, {
+                    headers: { "Authorization": token }
+                })
+                toast.success("Postagem atualizada com sucesso.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined,
+                });
+            } catch (error) {
+                console.log(`Error: ${error}`)
+                toast.error("Erro ao atualizar! Por favor, verifique a quantidade mínima de caracteres.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined,
+                });
+            }
+
         } else {
-            post(`/postagens`, postagem, setPostagem, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-            toast.success('Postagem cadastrada com sucesso.', {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                theme: 'colored',
-                progress: undefined,
-        })
+            try {
+                await post(`/postagens`, postagem, setPostagem, {
+                    headers: { "Authorization": token }
+                })
+                toast.success("Postagem cadastrada com sucesso.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined,
+                });
+            } catch (error) {
+                console.log(`Error: ${error}`)
+                toast.error("Erro ao cadastrar! Por favor, verifique a quantidade mínima de caracteres.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined,
+                });
+            }
         }
         back()
-
     }
 
     function back() {

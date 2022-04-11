@@ -2,18 +2,21 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import { Container, Typography, TextField, Button } from "@material-ui/core"
 import Tema from '../../../models/Tema';
 import { buscaId, post, put } from '../../../services/Services';
-import useLocalStorage from 'react-use-localstorage';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/TokensReducer';
 
 function CadastroTema() {
     let history = useHistory();
     const { id } = useParams<{ id: string }>();
-    const [token, setToken] = useLocalStorage('token');
     const [tema, setTema] = useState<Tema>({
         id: 0,
         descricao: ''
     })
+    const token=useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )
 
     useEffect(() => {
         if (token == '') {
@@ -52,40 +55,69 @@ function CadastroTema() {
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        console.log('temas' + JSON.stringify(tema))
+        console.log("Tema " + JSON.stringify(tema))
 
+        //se existir um if, ele vai atualizar o tema
         if (id !== undefined) {
-            console.log(tema)
-            put(`./temas`, tema, setTema, {
-                headers: { 'Authorization': token }
-            })
-            toast.success('Tema atualizada com sucesso.', {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                theme: 'colored',
-                progress: undefined,
-        })
-        }
-        else {
-            post(`/temas`, tema, setTema, {
-                headers: { 'Authorization': token }
-            })
-            toast.success('Tema cadastrado com sucesso.', {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                theme: 'colored',
-                progress: undefined,
-        })
-        }
-        back()
+
+            try {
+                await put(`/temas`, tema, setTema, {
+                    headers: { "Authorization": token }
+                })
+                toast.success("Tema atualizado com sucesso.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined,
+                });
+            } catch (error) {
+                console.log(`Error: ${error}`)
+                toast.error("Erro ao atualizar! Por favor, verifique a quantidade mínima de caracteres.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined, 
+                });
+            }
+
+        } else { //se não existir, ele vai criar um tema
+            try {
+                await post(`/temas`, tema, setTema, {
+                    headers: { "Authorization": token }
+                })
+                toast.success("Tema cadastrado com sucesso.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined, 
+                });
+            } catch (error) {
+                console.log(`Error: ${error}`)
+                toast.error("Erro ao cadastrar! Por favor, verifique a quantidade mínima de caracteres.", {
+                    position: "top-right", //posição do alerta
+                    autoClose: 2000, //tempo da notificação na tela
+                    hideProgressBar: false, //se aparece barra de progresso
+                    closeOnClick: true, //se aparece o X para fechar a notificação
+                    pauseOnHover: true, //se passar o mouse em cima, o tempo para fechar congela
+                    draggable: false, //se pode mover a notificação de local
+                    theme: "colored", // visual
+                    progress: undefined, 
+                });
+            }
+
+        } back()
     }
 
     function back()

@@ -13,9 +13,9 @@ function TabPostagem() {
   return (
     <>
       <TabContext value={value}>
-        <AppBar position="static">
+        <AppBar position="static" className='cor'>
           <Tabs centered indicatorColor="primary" onChange={handleChange}>
-            <Tab label="Todas as postagenssss" value="1"/>
+            <Tab label="Todas as postagens" value="1"/>
             <Tab label="Sobre-nós" value="2" />
           </Tabs>
         </AppBar>

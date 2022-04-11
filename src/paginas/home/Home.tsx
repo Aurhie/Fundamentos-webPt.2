@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Typography, Box, Grid, Button } from '@material-ui/core';
 import './Home.css';
 import TabPostagem from '../../componentes/postagens/tabpostagem/TabPostagem';
-import rohan from '../../assets/img/rohan.png';
+import gon from '../../assets/img/Gon.png';
 import { Link, useHistory } from "react-router-dom";
 import ModalPostagem from "../../componentes/postagens/modalPost/ModalPost";
 import { useSelector } from "react-redux";
@@ -49,9 +49,9 @@ function Home() {
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
-                    <img src={rohan} alt="" width="500px" height="500px" />
+                    <img src={gon} alt="" width="500px" height="500px" />
                 </Grid>
-                <Grid xs={12} className='postagens'>
+                <Grid xs={12} className='postagens '>
                     <TabPostagem />
                 </Grid>
             </Grid>

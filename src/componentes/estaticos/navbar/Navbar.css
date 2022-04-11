@@ -11,8 +11,8 @@ color:#ffffff;
 
 .imgLogo
 {
-    background-image: url(../../../assets/img/JojoLogo.png);
-    width: 20vh;
+    background-image: url(../../../assets/img/Hunter_x_hunter.png);
+    width: 25vh;
     height: 10vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -22,5 +22,5 @@ color:#ffffff;
 
 .navCor
 {
-    background-color: #C71585;
+    background-color: #25a00a;
 }

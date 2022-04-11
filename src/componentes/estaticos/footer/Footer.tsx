@@ -36,10 +36,10 @@ function Footer() {
                 </Box>
                 <Box className='box2'>
                     <Box paddingTop={1}>
-                        <Typography variant="subtitle2" align="center" gutterBottom className='text' >Copyright © 2022 by LuLuLand's</Typography>
+                        <Typography variant="subtitle2" align="right" gutterBottom className='text' >Copyright © 2022 by LuLuLand's</Typography>
                     </Box>
                     <Box>
-                        <Typography variant="subtitle2" gutterBottom className='text' align="center">All Rights reserved</Typography>
+                        <Typography variant="subtitle2" gutterBottom className='text' align="right">All Rights reserved</Typography>
                     </Box>
                 </Box>
             </Grid>
