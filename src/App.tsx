@@ -6,7 +6,7 @@ import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario';
 import Home from './paginas/home/Home'
 import Login from './paginas/login/Login'
 import './App.css';
-import ListaTema from './componentes/temas/listaTema/ListaTema';
+import ListaTema from '../src/componentes/temas/listaTema/ListaTema'
 import ListaPostagem from './componentes/postagens/listapostagem/ListaPostagem';
 import CadastroPost from './componentes/postagens/cadastroPost/CadastroPost';
 import CadastroTema from './componentes/temas/cadastroTema/CadastroTema';
