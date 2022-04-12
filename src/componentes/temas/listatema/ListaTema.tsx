@@ -50,7 +50,7 @@ useEffect(()=>{
         <Card variant="outlined">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Tema
+              Tema 
             </Typography>
             <Typography variant="h5" component="h2">
               {temas.descricao}
